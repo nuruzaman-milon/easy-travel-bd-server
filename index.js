@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 require("dotenv").config();
 const userRoutes = require('./routes/userRoutes');
 const partnersRoutes = require('./routes/pratnersRoute');
+const availableBusRoutes = require('./routes/availableBusTicketRoute');
 
 //middleware
 app.use(cors())
@@ -18,8 +19,9 @@ mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cl
 
 
 //routes
-// app.use('/users', userRoutes);
+app.use('/users', userRoutes);
 app.use('/partners', partnersRoutes);
+app.use('/available-bus',availableBusRoutes)
 
 app.get('/', (req, res) => {
   res.send('Server is running successfully')
