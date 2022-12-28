@@ -19,14 +19,11 @@ router.get("/", async (req, res) => {
   }
 });
 
-// get a user route based on specific id
-router.get("/:id", async (req, res) => {
+// get a user route based on specific email
+router.get("/:email", async (req, res) => {
   try {
-    const id = req.params.id;
-    const specificUser = await UserModel.findOne(
-      { _id: id },
-      { name: 1, _id: 0 }
-    );
+    const email = req.params.email;
+    const specificUser = await UserModel.findOne({ email });
     if (specificUser) {
       res.status(200).send(specificUser);
     } else {
