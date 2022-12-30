@@ -1,9 +1,23 @@
 const express = require("express");
 const router = express.Router();
+const jwt = require('jsonwebtoken');
+require("dotenv").config();
 const mongoose = require("mongoose");
 const userSchema = require("../schemas/userSchema");
+const verifyJwt = require('../CustiomMiddleWares/JWT');
 
 const UserModel = new mongoose.model("UserModel", userSchema);
+
+router.get('/jwt', async (req, res) => {
+  const email = req.query.email;
+  const query = { email: email };
+  const user = await UserModel.findOne(query);
+  if (user) {
+    const token = jwt.sign({ email }, process.env.ACCESS_TOKEN, { expiresIn: '1hr' });
+    return res.send({ accessToken: token });
+  }
+  res.status(403).send({ accessToken: "" })
+})
 
 // get all user route
 router.get("/", async (req, res) => {
@@ -20,7 +34,7 @@ router.get("/", async (req, res) => {
 });
 
 // get a user route based on specific email
-router.get("/:email", async (req, res) => {
+router.get("/:email", verifyJwt, async (req, res) => {
   try {
     const email = req.params.email;
     const specificUser = await UserModel.findOne({ email });
