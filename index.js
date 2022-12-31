@@ -7,6 +7,7 @@ require("dotenv").config();
 const userRoutes = require("./routes/userRoutes");
 const partnersRoutes = require("./routes/pratnersRoute");
 const availableBusRoutes = require("./routes/availableBusTicketRoute");
+const busProviderRoutes = require("./routes/busProviderRoute");
 
 //middleware
 app.use(cors());
@@ -23,6 +24,7 @@ mongoose
 app.use("/users", userRoutes);
 app.use("/partners", partnersRoutes);
 app.use("/available-bus", availableBusRoutes);
+app.use("/busProvider", busProviderRoutes);
 
 app.get("/", (req, res) => {
   res.send("Server is running successfully");

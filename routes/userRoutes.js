@@ -75,13 +75,13 @@ router.post("/", async (req, res) => {
 });
 
 // update a user route
-router.put("/:id", async (req, res) => {
+router.put("/:email", async (req, res) => {
   try {
-    const id = req.params.id;
+    const email = req.params.email;
     const user = req.body;
 
     const updateUser = await UserModel.updateOne(
-      { _id: id },
+      { email: email },
       {
         $set: user,
       }

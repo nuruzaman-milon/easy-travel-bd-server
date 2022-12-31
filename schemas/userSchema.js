@@ -6,6 +6,8 @@ const userSchema = mongoose.Schema({
   },
   email: String,
   accountType: String,
+  isVerified: Boolean,
+  phone: Number,
   created_at: {
     type: Date,
     default: Date.now,
