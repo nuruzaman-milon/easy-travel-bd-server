@@ -90,6 +90,23 @@ router.get('/search-data', async (req, res) => {
     }
 });
 
+router.post("/", async (req, res) => {
+    try {
+      const busProvider = req.body;
+  
+      const newBusProvider = new AvailableBus(busProvider);
+      await newBusProvider.save((err) => {
+        if (!err) {
+          res.status(201).send({ message: "new Bus created successfully" });
+        } else {
+          res.status(500).send({ message: "not created" });
+        }
+      });
+    } catch (error) {
+      res.status(500).send({ message: error.message });
+    }
+  });
+
 
 
 module.exports = router;

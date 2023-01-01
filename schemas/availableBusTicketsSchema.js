@@ -11,7 +11,6 @@ const busTicketSchema = mongoose.Schema({
     },
     Image: {
         type: String,
-        required: [true, "Bus image is required"]
     },
     ReportingTime: {
         type: String,
@@ -47,7 +46,6 @@ const busTicketSchema = mongoose.Schema({
     },
     Facilities: {
         type: Array,
-        required: [true, "Bus facilities is required"]
     },
     SeatCapacity: {
         type: Number,
