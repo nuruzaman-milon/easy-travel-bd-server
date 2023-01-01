@@ -26,6 +26,7 @@ router.get("/", async (req, res) => {
 router.get("/:email", async (req, res) => {
   try {
     const email = req.params.email;
+    // console.log(email);
     const specificUser = await BusProviderModel.findOne({ email });
     if (specificUser) {
       res.status(200).send(specificUser);
